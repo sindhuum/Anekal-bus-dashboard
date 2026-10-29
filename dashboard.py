@@ -3,7 +3,11 @@ import json
 import math
 from pathlib import Path
 
-D = json.loads((Path(__file__).parent / "data" / "anekal.json").read_text(encoding="utf-8"))
+_BASE = Path(__file__).parent
+_PATH = _BASE / "data" / "anekal.json"
+if not _PATH.exists():  # also works when anekal.json sits next to this file
+    _PATH = _BASE / "anekal.json"
+D = json.loads(_PATH.read_text(encoding="utf-8"))
 
 LEVELS = ["High (200+)", "Medium (50-199)", "Low (10-49)", "Very low (<10)"]
 ZONES = [("a", "All areas"), ("0", "Anekal town (within 4 km)"), ("1", "Wider area (4-12 km)")]
